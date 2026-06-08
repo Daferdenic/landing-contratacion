@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KoWeb | soluciones . ingeniería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#f8faff;
+      --bg2:#eef3fb;
+      --bg3:#ffffff;
+      --accent:#0056d2;
+      --accent2:#003fa3;
+      --accent-light:#e8f0fe;
+      --gold:#f0b429;
+      --green:#00a86b;
+      --text:#0d1829;
+      --muted:#5a6a85;
+      --card:#ffffff;
+      --border:rgba(0,86,210,0.13);
+      --border2:#d4e0f7;
+      --font:'Sora',sans-serif;
+      --mono:'DM Mono',monospace;
+      --radius:14px;
+      --shadow:0 4px 24px rgba(0,86,210,0.08);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1rem 3rem;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border2);
+      box-shadow:0 2px 12px rgba(0,86,210,0.06);
+    }
+    .logo{display:flex;flex-direction:column;line-height:1;}
+    .logo-main{font-size:1.5rem;font-weight:800;letter-spacing:-1px;}
+    .logo-main .ko{color:var(--accent);}
+    .logo-main .web{color:var(--gold);}
+    .logo-sub{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:2px;margin-top:2px;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;}
+    .nav-links a:hover{color:var(--accent);}
+    .nav-cta{background:var(--accent);color:#fff;padding:.55rem 1.4rem;border-radius:8px;font-weight:700;font-size:.85rem;text-decoration:none;transition:background .2s,transform .2s;}
+    .nav-cta:hover{background:var(--accent2);transform:translateY(-1px);}
+
+    /* ── HERO ── */
+    #inicio{
+      min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+      padding:8rem 3rem 5rem;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#f0f5ff 0%,#ffffff 60%,#e8f0fe 100%);
+    }
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:var(--accent-light);border:1px solid var(--border);
+      padding:.4rem 1rem;border-radius:99px;font-size:.75rem;
+      font-family:var(--mono);color:var(--accent);margin-bottom:1.5rem;width:fit-content;
+    }
+    .hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite;}
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+    h1{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1.4rem;color:var(--text);}
+    h1 em{font-style:normal;color:var(--accent);}
+    .hero-sub{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;max-width:460px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-p{background:var(--accent);color:#fff;padding:.85rem 2rem;border-radius:9px;font-weight:700;font-size:.95rem;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(0,86,210,.25);}
+    .btn-p:hover{background:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,86,210,.35);}
+    .btn-s{border:2px solid var(--border);color:var(--text);padding:.85rem 2rem;border-radius:9px;font-weight:600;font-size:.95rem;text-decoration:none;transition:border-color .2s,color .2s;}
+    .btn-s:hover{border-color:var(--accent);color:var(--accent);}
+    .hero-img{border-radius:18px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 20px 60px rgba(0,86,210,.12);}
+    .hero-img img{width:100%;height:420px;object-fit:cover;display:block;}
+
+    /* ── STATS ── */
+    .stats{background:#fff;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:2rem 3rem;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;box-shadow:var(--shadow);}
+    .stat{text-align:center;}
+    .stat-n{font-size:2.2rem;font-weight:800;color:var(--accent);}
+    .stat-l{font-size:.78rem;color:var(--muted);margin-top:.2rem;}
+
+    /* ── SECTIONS ── */
+    section{padding:5rem 3rem;}
+    .inner{max-width:1200px;margin:0 auto;}
+    .stag{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.7rem;}
+    .stitle{font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:800;letter-spacing:-1px;margin-bottom:1rem;color:var(--text);}
+    .ssub{color:var(--muted);max-width:520px;line-height:1.75;margin-bottom:3rem;}
+
+    /* ── PROBLEMA ── */
+    #problema{background:var(--bg2);}
+    .problema-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .problema-img img{width:100%;border-radius:var(--radius);object-fit:cover;height:480px;box-shadow:var(--shadow);}
+    .problema-items{display:flex;flex-direction:column;gap:1.5rem;}
+    .problema-item{display:flex;gap:1rem;align-items:flex-start;}
+    .prob-icon{width:44px;height:44px;border-radius:10px;background:#fff0f0;border:1px solid #ffd0d0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+    .problema-item h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem;}
+    .problema-item p{font-size:.85rem;color:var(--muted);line-height:1.6;}
+    .problema-cta{margin-top:2rem;font-size:.95rem;color:var(--text);line-height:1.7;background:var(--accent-light);border-left:4px solid var(--accent);padding:1rem 1.2rem;border-radius:0 8px 8px 0;}
+    .problema-cta strong{color:var(--accent);}
+
+    /* ── SERVICIOS ── */
+    #servicios{background:#fff;}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+    .scard{background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);padding:2rem;transition:transform .25s,border-color .25s,box-shadow .25s;}
+    .scard:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 12px 40px rgba(0,86,210,.12);}
+    .scard-icon{font-size:2rem;margin-bottom:1rem;}
+    .scard h3{font-size:1rem;font-weight:700;margin-bottom:.6rem;}
+    .scard p{font-size:.85rem;color:var(--muted);line-height:1.65;}
+    .slink{display:inline-block;margin-top:1.2rem;font-size:.8rem;color:var(--accent);text-decoration:none;font-weight:700;border-bottom:2px solid transparent;transition:border-color .2s;}
+    .slink:hover{border-color:var(--accent);}
+
+    /* ── POR QUÉ ── */
+    #porque{background:var(--accent);color:#fff;}
+    #porque .stag{color:rgba(255,255,255,.7);}
+    #porque .stitle{color:#fff;}
+    #porque .ssub{color:rgba(255,255,255,.75);}
+    .porq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .porq-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);padding:1.8rem;text-align:center;transition:background .25s,transform .25s;}
+    .porq-card:hover{background:rgba(255,255,255,.18);transform:translateY(-4px);}
+    .porq-icon{font-size:2.2rem;margin-bottom:1rem;}
+    .porq-card h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem;color:#fff;}
+    .porq-card p{font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6;}
+
+    /* ── CAPACITACIONES ── */
+    #capacitaciones{background:var(--bg2);}
+    .cursos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+    .curso{background:#fff;border:1px solid var(--border2);border-radius:var(--radius);padding:1.8rem;display:flex;flex-direction:column;gap:.8rem;box-shadow:var(--shadow);}
+    .cnivel{font-family:var(--mono);font-size:.7rem;padding:.25rem .8rem;border-radius:99px;width:fit-content;font-weight:600;}
+    .n-b{background:#e8f0fe;color:var(--accent);}
+    .n-a{background:#fff8e1;color:#b07800;}
+    .n-t{background:#e6f9f1;color:#007a4d;}
+    .curso h3{font-size:.98rem;font-weight:700;}
+    .curso p{font-size:.84rem;color:var(--muted);line-height:1.65;flex:1;}
+    .cmeta{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);font-family:var(--mono);border-top:1px solid var(--border2);padding-top:.8rem;}
+    .btn-curso{background:var(--accent);color:#fff;padding:.65rem 1.2rem;border-radius:8px;font-weight:600;font-size:.84rem;text-decoration:none;text-align:center;transition:background .2s;}
+    .btn-curso:hover{background:var(--accent2);}
+    .cce-link{margin-top:2.5rem;text-align:center;}
+    .cce-link a{color:var(--accent);font-weight:700;text-decoration:none;font-size:.92rem;border-bottom:2px solid var(--border2);padding-bottom:2px;transition:border-color .2s;}
+    .cce-link a:hover{border-color:var(--accent);}
+
+    /* ── VIDEOS ── */
+    #recursos{background:#fff;}
+    .videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:3.5rem;}
+    .vcard{background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:var(--shadow);}
+    .vcard:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,86,210,.14);}
+    .vthumb{position:relative;cursor:pointer;overflow:hidden;}
+    .vthumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .3s;}
+    .vcard:hover .vthumb img{transform:scale(1.03);}
+    .vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);transition:background .2s;}
+    .vplay:hover{background:rgba(0,0,0,.45);}
+    .vplay svg{width:56px;height:56px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));}
+    .vinfo{padding:1.2rem;}
+    .vinfo h4{font-size:.92rem;font-weight:700;margin-bottom:.4rem;}
+    .vinfo p{font-size:.8rem;color:var(--muted);}
+    .vinfo a{display:inline-block;margin-top:.8rem;font-size:.78rem;color:var(--accent);font-weight:700;text-decoration:none;}
+
+    .recursos-ext{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.2rem;}
+    .ritem{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:1.4rem;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.5rem;}
+    .ritem:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,86,210,.1);}
+    .ritem-icon{font-size:1.5rem;}
+    .ritem h4{font-size:.88rem;font-weight:700;}
+    .ritem p{font-size:.78rem;color:var(--muted);}
+    .ritem span{font-size:.72rem;color:var(--accent);font-family:var(--mono);margin-top:auto;font-weight:600;}
+
+    /* ── TESTIMONIOS ── */
+    #testimonios{background:var(--bg2);}
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+    .tcard{background:#fff;border:1px solid var(--border2);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);position:relative;}
+    .tcard::before{content:'"';font-size:5rem;color:var(--accent);opacity:.1;position:absolute;top:.5rem;left:1.5rem;font-family:Georgia,serif;line-height:1;}
+    .tcard p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;position:relative;z-index:1;}
+    .tauthor{display:flex;align-items:center;gap:.8rem;}
+    .tavatar{width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#fff;}
+    .tname{font-size:.88rem;font-weight:700;}
+    .trole{font-size:.75rem;color:var(--muted);}
+
+    /* ── FAQ ── */
+    #faq{background:#fff;}
+    .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;}
+    .faq-item{background:var(--bg);border:1px solid var(--border2);border-radius:12px;overflow:hidden;}
+    .faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--font);font-size:.95rem;font-weight:600;padding:1.3rem 1.5rem;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s;}
+    .faq-q:hover{color:var(--accent);}
+    .faq-q .arr{font-size:1.2rem;transition:transform .3s;color:var(--accent);}
+    .faq-item.open .arr{transform:rotate(45deg);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+    .faq-item.open .faq-a{max-height:300px;}
+    .faq-a p{padding:0 1.5rem 1.3rem;font-size:.88rem;color:var(--muted);line-height:1.7;}
+
+    /* ── CONTACTO ── */
+    #contacto{background:var(--bg2);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+    .contact-info h2{font-size:1.9rem;font-weight:800;margin-bottom:1rem;letter-spacing:-1px;}
+    .contact-info p{color:var(--muted);line-height:1.75;margin-bottom:2rem;}
+    .cdetail{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;font-size:.88rem;color:var(--muted);}
+    .cdetail strong{color:var(--text);}
+    form{background:#fff;border:1px solid var(--border2);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1.1rem;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    label{font-size:.78rem;color:var(--muted);margin-bottom:.3rem;display:block;font-weight:600;}
+    input,select,textarea{width:100%;background:var(--bg);border:1.5px solid var(--border2);border-radius:9px;padding:.8rem 1rem;color:var(--text);font-family:var(--font);font-size:.88rem;transition:border-color .2s;outline:none;}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent);background:#fff;}
+    select option{background:#fff;}
+    textarea{resize:vertical;min-height:110px;}
+    .btn-sub{background:var(--accent);color:#fff;border:none;padding:1rem 2rem;border-radius:9px;font-weight:700;font-size:.98rem;cursor:pointer;transition:background .2s,transform .2s;font-family:var(--font);}
+    .btn-sub:hover{background:var(--accent2);transform:translateY(-2px);}
+    #fmsg{display:none;color:var(--green);font-size:.84rem;margin-top:.4rem;font-weight:600;}
+
+    /* ── CTA BANNER ── */
+    .cta-banner{background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:var(--radius);padding:3.5rem;text-align:center;max-width:800px;margin:0 auto;}
+    .cta-banner h2{font-size:2rem;font-weight:800;color:#fff;margin-bottom:1rem;}
+    .cta-banner p{color:rgba(255,255,255,.85);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;}
+    .btn-white{background:#fff;color:var(--accent);padding:.85rem 2rem;border-radius:9px;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;display:inline-block;}
+    .btn-white:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+
+    /* ── FOOTER ── */
+    footer{background:var(--accent2);color:#fff;padding:3rem 3rem 2rem;}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+    .fbrand p{color:rgba(255,255,255,.7);font-size:.83rem;line-height:1.7;margin-top:.8rem;max-width:240px;}
+    .flogo-main{font-size:1.4rem;font-weight:800;letter-spacing:-1px;}
+    .flogo-main .ko{color:#fff;}
+    .flogo-main .web{color:var(--gold);}
+    .flogo-sub{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.5);letter-spacing:2px;margin-top:2px;}
+    .fcol h4{font-size:.88rem;font-weight:700;margin-bottom:1rem;color:#fff;}
+    .fcol ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+    .fcol a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.83rem;transition:color .2s;}
+    .fcol a:hover{color:#fff;}
+    .facad{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:1.2rem;margin-top:1rem;}
+    .facad p{font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.7;}
+    .facad strong{color:#fff;}
+    .fbot{border-top:1px solid rgba(255,255,255,.15);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;}
+    .fbot p{font-size:.78rem;color:rgba(255,255,255,.55);}
+    .socials{display:flex;gap:1rem;}
+    .socials a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.83rem;transition:color .2s;}
+    .socials a:hover{color:#fff;}
+
+    /* ── WhatsApp flotante ── */
+    .wa-float{position:fixed;bottom:2rem;right:2rem;z-index:300;background:#25d366;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:transform .2s;}
+    .wa-float:hover{transform:scale(1.1);}
+    .wa-float svg{width:30px;height:30px;fill:#fff;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      nav{padding:1rem 1.5rem;}
+      .nav-links{display:none;}
+      .hero-inner,.problema-grid,.contact-grid{grid-template-columns:1fr;}
+      .hero-img{order:-1;}
+      .porq-grid{grid-template-columns:1fr 1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      section{padding:4rem 1.5rem;}
+    }
+    @media(max-width:580px){
+      .stats{gap:2rem;}
+      .porq-grid{grid-template-columns:1fr;}
+      .form-row{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- WhatsApp flotante -->
+<a class="wa-float" href="https://wa.me/573185187722" target="_blank" rel="noopener" title="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 .5C7.439.5.5 7.439.5 16c0 2.777.733 5.388 2.013 7.65L.5 31.5l8.14-2.13A15.44 15.44 0 0016 31.5c8.561 0 15.5-6.939 15.5-15.5S24.561.5 16 .5zm0 28.3a13.73 13.73 0 01-7.01-1.921l-.503-.298-5.198 1.361 1.384-5.056-.327-.52A13.73 13.73 0 012.2 16C2.2 8.374 8.374 2.2 16 2.2S29.8 8.374 29.8 16 23.626 28.8 16 28.8zm7.55-10.3c-.414-.207-2.45-1.208-2.83-1.347-.38-.138-.656-.207-.933.207-.276.414-1.07 1.347-1.312 1.624-.242.276-.483.31-.897.104-.414-.207-1.748-.644-3.328-2.053-1.23-1.098-2.06-2.453-2.302-2.867-.242-.414-.026-.638.182-.844.186-.185.414-.483.621-.724.207-.242.276-.414.414-.69.138-.276.069-.518-.035-.724-.103-.207-.932-2.247-1.277-3.077-.336-.808-.678-.698-.932-.711l-.793-.014c-.276 0-.725.104-1.104.518-.38.414-1.45 1.416-1.45 3.454 0 2.038 1.485 4.007 1.692 4.284.207.276 2.923 4.463 7.082 6.258.99.427 1.762.682 2.364.873.993.316 1.897.272 2.612.165.797-.12 2.45-1.001 2.796-1.969.346-.967.346-1.796.242-1.969-.103-.172-.38-.276-.793-.483z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-main"><span class="ko">Ko</span><span class="web">Web</span></div>
+    <div class="logo-sub">soluciones . ingeniería</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#capacitaciones">Capacitaciones</a></li>
+    <li><a href="#recursos">Recursos</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Asesoría gratuita</a>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Pasto, Nariño · Colombia 2026</div>
+      <h1>¿Quieres contratar con el <em>Estado colombiano</em>?<br>Nosotros te guiamos.</h1>
+      <p class="hero-sub">KoWeb simplifica tu acceso a SECOP II, SIA Observa y Colombia Compra Eficiente. Búsqueda de procesos, rastreo de recursos, consultoría y capacitaciones para proveedores del Estado.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-p">Quiero saber más</a>
+        <a href="#servicios" class="btn-s">Ver servicios →</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="Contratación pública digital Colombia"/>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n">+50K</div><div class="stat-l">Procesos en SECOP II</div></div>
+  <div class="stat"><div class="stat-n">$14B</div><div class="stat-l">Ahorros en contratación 2024</div></div>
+  <div class="stat"><div class="stat-n">1.200+</div><div class="stat-l">Entidades conectadas</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Transparencia ciudadana</div></div>
+</div>
+
+<!-- PROBLEMA -->
+<section id="problema">
+  <div class="inner">
+    <div class="problema-grid">
+      <div class="problema-img">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80" alt="Empresario con dudas"/>
+      </div>
+      <div>
+        <p class="stag">// ¿Te ha pasado esto?</p>
+        <h2 class="stitle">¿Cuándo fue la última vez que ganaste un proceso con el Estado?</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:2rem;">Es común creer que las empresas pequeñas o medianas no pueden ganar procesos con el Estado. Pero la realidad es otra. Lo que te ha detenido probablemente es uno de estos:</p>
+        <div class="problema-items">
+          <div class="problema-item">
+            <div class="prob-icon">❌</div>
+            <div><h4>No cumples con los requisitos habilitantes</h4><p>El RUP, las capacidades financieras y la experiencia son barreras que se pueden superar con la orientación correcta.</p></div>
+          </div>
+          <div class="problema-item">
+            <div class="prob-icon">🔍</div>
+            <div><h4>No sabes cómo buscar procesos en SECOP II</h4><p>La plataforma tiene miles de oportunidades activas que muy pocos proveedores saben encontrar eficientemente.</p></div>
+          </div>
+          <div class="problema-item">
+            <div class="prob-icon">📄</div>
+            <div><h4>Los pliegos son difíciles de interpretar</h4><p>Sin experiencia, leer un pliego de condiciones puede tomar días y aun así quedar con dudas críticas.</p></div>
+          </div>
+          <div class="problema-item">
+            <div class="prob-icon">⏰</div>
+            <div><h4>El tiempo no te alcanza</h4><p>Gestionar una licitación requiere dedicación. KoWeb se convierte en tu departamento externo de contratación.</p></div>
+          </div>
+        </div>
+        <div class="problema-cta">La realidad puede cambiar. <strong>Existe una forma de hacerlo sin intermediarios políticos, sin dádivas y sin necesitar el amigo de turno.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="inner">
+    <p class="stag">// Nuestros servicios</p>
+    <h2 class="stitle">Todo lo que necesitas para contratar con el Estado</h2>
+    <p class="ssub">Desde la búsqueda de procesos hasta el acompañamiento en la ejecución contractual. Operamos como tu equipo externo de contratación.</p>
+    <div class="services-grid">
+      <div class="scard"><div class="scard-icon">🔍</div><h3>Búsqueda de procesos en SECOP II</h3><p>Encontramos procesos activos filtrados por sector, entidad, región y modalidad adaptados a tu perfil de proveedor.</p><a href="#contacto" class="slink">Solicitar servicio →</a></div>
+      <div class="scard"><div class="scard-icon">📡</div><h3>Alertas y rastreo de recursos</h3><p>Monitoreo de la inversión pública y notificaciones de nuevos procesos según tu actividad económica y capacidad.</p><a href="#contacto" class="slink">Solicitar servicio →</a></div>
+      <div class="scard"><div class="scard-icon">📋</div><h3>Consultoría contractual BPO</h3><p>Nos convertimos en tu departamento de contratación: análisis de pliegos, estructuración de ofertas y seguimiento.</p><a href="#contacto" class="slink">Solicitar servicio →</a></div>
+      <div class="scard"><div class="scard-icon">🎓</div><h3>Capacitaciones SECOP II</h3><p>Cursos prácticos para proveedores, supervisores y operadores de plataformas de contratación pública colombiana.</p><a href="#capacitaciones" class="slink">Ver cursos →</a></div>
+      <div class="scard"><div class="scard-icon">📊</div><h3>Rastreo SIA Observa</h3><p>Seguimiento e inversión pública. Análisis de contratos por entidad, valor y estado de ejecución en tiempo real.</p><a href="#contacto" class="slink">Solicitar servicio →</a></div>
+      <div class="scard"><div class="scard-icon">🤝</div><h3>Acompañamiento en ejecución</h3><p>Soporte técnico y documental durante la ejecución contractual. Informes de gestión, actas y reportes institucionales.</p><a href="#contacto" class="slink">Solicitar servicio →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ -->
+<section id="porque">
+  <div class="inner">
+    <p class="stag">// ¿Por qué KoWeb?</p>
+    <h2 class="stitle">Trabajamos bajo un enfoque de resultados</h2>
+    <p class="ssub">Nos convertimos en tu aliado estratégico en contratación pública. Estos son los valores que nos definen.</p>
+    <div class="porq-grid">
+      <div class="porq-card"><div class="porq-icon">🏆</div><h3>Gestión Integral</h3><p>Nos encargamos de todas las fases: búsqueda, análisis, estructuración y seguimiento hasta la adjudicación.</p></div>
+      <div class="porq-card"><div class="porq-icon">⚖️</div><h3>Transparencia total</h3><p>Operamos de forma legal y transparente. Sin intermediarios, sin política, sin comprometer tu reputación.</p></div>
+      <div class="porq-card"><div class="porq-icon">🎯</div><h3>Orientados a resultados</h3><p>Nuestro único objetivo es que ganes el proceso. Trabajamos bajo métricas claras y reportes de gestión.</p></div>
+      <div class="porq-card"><div class="porq-icon">🔒</div><h3>Confidencialidad</h3><p>Tu información contractual y estratégica se maneja con absoluta reserva y protección de datos.</p></div>
+      <div class="porq-card"><div class="porq-icon">📱</div><h3>Tecnología aplicada</h3><p>Usamos herramientas digitales avanzadas para monitoreo, análisis y gestión de procesos en SECOP II.</p></div>
+      <div class="porq-card"><div class="porq-icon">🔄</div><h3>Información actualizada</h3><p>Estamos al día con las novedades de Colombia Compra Eficiente, circulares y cambios normativos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPACITACIONES -->
+<section id="capacitaciones">
+  <div class="inner">
+    <p class="stag">// Formación especializada</p>
+    <h2 class="stitle">Capacitaciones en contratación pública</h2>
+    <p class="ssub">Aprende a navegar y operar las plataformas del Estado colombiano con expertos en contratación pública.</p>
+    <div class="cursos-grid">
+      <div class="curso"><span class="cnivel n-b">Básico</span><h3>Introducción a SECOP II</h3><p>Aprende a registrarte, configurar tu perfil de proveedor y consultar procesos activos en la plataforma transaccional del Estado.</p><div class="cmeta"><span>📅 Julio 2026</span><span>⏱ 4 horas</span></div><a href="#contacto" class="btn-curso">Inscribirme ahora</a></div>
+      <div class="curso"><span class="cnivel n-a">Avanzado</span><h3>Presentación de ofertas y gestión contractual</h3><p>Domina el proceso completo: lectura de pliegos, presentación de ofertas y seguimiento de la ejecución del contrato.</p><div class="cmeta"><span>📅 Agosto 2026</span><span>⏱ 8 horas</span></div><a href="#contacto" class="btn-curso">Inscribirme ahora</a></div>
+      <div class="curso"><span class="cnivel n-t">Taller</span><h3>Lectura e interpretación de pliegos</h3><p>Aprende a identificar requisitos habilitantes, criterios de evaluación y condiciones especiales en los documentos del proceso.</p><div class="cmeta"><span>📅 Julio 2026</span><span>⏱ 3 horas</span></div><a href="#contacto" class="btn-curso">Inscribirme ahora</a></div>
+    </div>
+    <div class="cce-link">
+      <p style="color:var(--muted);margin-bottom:.8rem;font-size:.88rem;">¿Prefieres formarte directamente con Colombia Compra Eficiente?</p>
+      <a href="https://www.colombiacompra.gov.co/capacitacion" target="_blank" rel="noopener">→ Acceder a la plataforma oficial de Colombia Compra Eficiente</a>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS Y VIDEOS -->
+<section id="recursos">
+  <div class="inner">
+    <p class="stag">// Recursos gratuitos</p>
+    <h2 class="stitle">Videos y guías para contratistas</h2>
+    <p class="ssub">Material de referencia para entender y operar el ecosistema digital de la contratación pública colombiana.</p>
+    <div class="videos-grid">
+
+      <div class="vcard">
+        <div class="vthumb" onclick="window.open('https://www.youtube.com/watch?v=mAdu3B045Lk','_blank')">
+          <img src="https://img.youtube.com/vi/mAdu3B045Lk/hqdefault.jpg" alt="Recupera tu usuario SECOP II"/>
+          <div class="vplay">
+            <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+          </div>
+        </div>
+        <div class="vinfo">
+          <h4>Recupera tu usuario y contraseña en SECOP II</h4>
+          <p>Guía paso a paso para recuperar el acceso a tu cuenta en la plataforma del Estado.</p>
+          <a href="https://www.youtube.com/watch?v=mAdu3B045Lk" target="_blank" rel="noopener">Ver en YouTube →</a>
+        </div>
+      </div>
+
+      <div class="vcard">
+        <div class="vthumb" onclick="window.open('https://www.youtube.com/watch?v=-3yIT-uSksI','_blank')">
+          <img src="https://img.youtube.com/vi/-3yIT-uSksI/hqdefault.jpg" alt="Ahorros contratación pública"/>
+          <div class="vplay">
+            <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+          </div>
+        </div>
+        <div class="vinfo">
+          <h4>Gobierno logra ahorros por $14 billones en contratación pública</h4>
+          <p>Resultados de la modernización digital en los procesos contractuales del Estado.</p>
+          <a href="https://www.youtube.com/watch?v=-3yIT-uSksI" target="_blank" rel="noopener">Ver en YouTube →</a>
+        </div>
+      </div>
+
+      <div class="vcard">
+        <div class="vthumb" onclick="window.open('https://www.youtube.com/shorts/gPiUa3F8Ax4','_blank')">
+          <img src="https://img.youtube.com/vi/gPiUa3F8Ax4/hqdefault.jpg" alt="Contratación Pública Digital Colombia"/>
+          <div class="vplay">
+            <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+          </div>
+        </div>
+        <div class="vinfo">
+          <h4>Contratación Pública Digital: el futuro ya llegó a Colombia</h4>
+          <p>SECOP II, SIA Observa e inteligencia artificial transformando la contratación.</p>
+          <a href="https://www.youtube.com/shorts/gPiUa3F8Ax4" target="_blank" rel="noopener">Ver en YouTube →</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="stag" style="margin-bottom:1.2rem;">// Guías y enlaces oficiales</p>
+    <div class="recursos-ext">
+      <a href="https://www.colombiacompra.gov.co/manuales-guias-y-pliegos-tipo" target="_blank" rel="noopener" class="ritem"><span class="ritem-icon">📘</span><h4>Manuales y guías oficiales</h4><p>Documentación de Colombia Compra Eficiente.</p><span>colombiacompra.gov.co →</span></a>
+      <a href="https://www.secop.gov.co" target="_blank" rel="noopener" class="ritem"><span class="ritem-icon">🏛️</span><h4>Portal SECOP II</h4><p>Plataforma transaccional del Estado.</p><span>secop.gov.co →</span></a>
+      <a href="https://www.colombiacompra.gov.co/tienda-virtual-del-estado-colombiano" target="_blank" rel="noopener" class="ritem"><span class="ritem-icon">🛒</span><h4>Tienda Virtual del Estado</h4><p>Acuerdos marco y catálogos.</p><span>Ver acuerdos →</span></a>
+      <a href="https://www.colombiacompra.gov.co/sia-observa" target="_blank" rel="noopener" class="ritem"><span class="ritem-icon">📊</span><h4>SIA Observa</h4><p>Seguimiento e inversión pública.</p><span>Consultar datos →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="inner">
+    <p class="stag">// Testimonios</p>
+    <h2 class="stitle">Lo que dicen nuestros clientes</h2>
+    <p class="ssub">Empresas y personas naturales que encontraron en KoWeb su aliado en contratación pública.</p>
+    <div class="test-grid">
+      <div class="tcard"><p>"Gracias a KoWeb pudimos participar por primera vez en un proceso con la Alcaldía. El acompañamiento fue impecable desde la lectura del pliego hasta la presentación de la oferta."</p><div class="tauthor"><div class="tavatar">MR</div><div><div class="tname">María Rodríguez</div><div class="trole">Gerente · Empresa TI, Pasto</div></div></div></div>
+      <div class="tcard"><p>"Llevábamos años sin adjudicaciones. KoWeb identificó exactamente por qué fallábamos y nos ayudó a estructurar una oferta ganadora. Profesionales de verdad."</p><div class="tauthor"><div class="tavatar">JM</div><div><div class="tname">Jorge Muñoz</div><div class="trole">Director · Constructora Nariño SAS</div></div></div></div>
+      <div class="tcard"><p>"La capacitación en SECOP II fue clara, práctica y aplicable desde el primer día. Ahora navego la plataforma con confianza y ya tengo mi primer proceso activo."</p><div class="tauthor"><div class="tavatar">LP</div><div><div class="tname">Laura Portilla</div><div class="trole">Contratista independiente · Ipiales</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="inner">
+    <p class="stag" style="text-align:center;">// Preguntas frecuentes</p>
+    <h2 class="stitle" style="text-align:center;">¿Tienes alguna duda?</h2>
+    <p class="ssub" style="margin:0 auto 3rem;text-align:center;">Las preguntas más comunes sobre nuestros servicios y la contratación pública.</p>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">¿Necesito experiencia previa para licitar con el Estado? <span class="arr">+</span></button><div class="faq-a"><p>No necesariamente. Lo que necesitas es un producto o servicio que puedas ofertar y cumplir con los requisitos habilitantes del proceso. KoWeb te guía en todo el proceso desde cero.</p></div></div>
+      <div class="faq-item"><button class="faq-q">¿Puedo participar en procesos de otras ciudades o regiones? <span class="arr">+</span></button><div class="faq-a"><p>Sí. SECOP II permite participar en procesos de cualquier entidad pública del país sin importar tu ubicación geográfica, siempre que cumplas con los requisitos técnicos y financieros.</p></div></div>
+      <div class="faq-item"><button class="faq-q">¿Cómo funciona el servicio de consultoría BPO? <span class="arr">+</span></button><div class="faq-a"><p>KoWeb actúa como tu departamento externo de contratación. Nos encargamos de buscar procesos, analizar pliegos, estructurar la oferta y hacer seguimiento hasta la adjudicación, todo de forma remota.</p></div></div>
+      <div class="faq-item"><button class="faq-q">¿KoWeb garantiza la adjudicación del contrato? <span class="arr">+</span></button><div class="faq-a"><p>No existe garantía absoluta, ya que la adjudicación depende de múltiples factores. Sin embargo, nos comprometemos a presentar la mejor oferta posible dentro del marco legal y a maximizar tus posibilidades.</p></div></div>
+      <div class="faq-item"><button class="faq-q">¿Cuánto tiempo toma obtener un primer contrato? <span class="arr">+</span></button><div class="faq-a"><p>Depende del tipo de proceso y la preparación del proveedor. Con trabajo riguroso, es posible obtener un primer contrato en un plazo de 3 a 6 meses.</p></div></div>
+      <div class="faq-item"><button class="faq-q">¿KoWeb es intermediario político o entidad del gobierno? <span class="arr">+</span></button><div class="faq-a"><p>No. KoWeb es una empresa privada de consultoría e ingeniería, completamente independiente, sin vínculos con entidades gubernamentales ni actores políticos. Operamos bajo los lineamientos legales vigentes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="background:var(--bg2);padding:4rem 3rem;">
+  <div class="cta-banner">
+    <h2>¿Listo para venderle al Estado colombiano?</h2>
+    <p>Da el primer paso hoy. Nuestro equipo está listo para acompañarte desde la búsqueda del proceso hasta la adjudicación.</p>
+    <a href="#contacto" class="btn-white">Solicitar asesoría gratuita</a>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="stag">// Contáctanos</p>
+        <h2>Solicita tu asesoría <span style="color:var(--accent)">gratuita</span></h2>
+        <p>Nuestro equipo de especialistas en contratación pública está listo para ayudarte a encontrar oportunidades y navegar el ecosistema digital del Estado colombiano.</p>
+        <div class="cdetail"><span>📍</span><div><strong>Pasto, Nariño</strong> · Colombia</div></div>
+        <div class="cdetail"><span>✉️</span><div><strong>david.delgado-ni@uniminuto.edu.co</strong></div></div>
+        <div class="cdetail"><span>📞</span><div><strong>+57 318 518 7722</strong></div></div>
+        <div class="cdetail"><span>💬</span><div><a href="https://wa.me/573185187722" style="color:var(--green);font-weight:700;text-decoration:none;">WhatsApp disponible</a></div></div>
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80" alt="Equipo KoWeb" style="width:100%;border-radius:var(--radius);margin-top:2rem;object-fit:cover;height:220px;border:1px solid var(--border2);box-shadow:var(--shadow);"/>
+      </div>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required/></div>
+          <div><label>Correo electrónico</label><input type="email" placeholder="tu@correo.com" required/></div>
+        </div>
+        <div><label>Ciudad</label><input type="text" placeholder="Tu ciudad"/></div>
+        <div>
+          <label>Servicio de interés</label>
+          <select>
+            <option value="">Selecciona un servicio</option>
+            <option>Búsqueda de procesos en SECOP II</option>
+            <option>Alertas y rastreo de recursos</option>
+            <option>Consultoría contractual BPO</option>
+            <option>Capacitación en SECOP II</option>
+            <option>Rastreo SIA Observa</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div><label>Mensaje (opcional)</label><textarea placeholder="Cuéntanos sobre tu necesidad..."></textarea></div>
+        <button type="submit" class="btn-sub">Solicitar asesoría gratuita →</button>
+        <p id="fmsg"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="fbrand">
+      <div>
+        <div class="flogo-main"><span class="ko">Ko</span><span class="web">Web</span></div>
+        <div class="flogo-sub">soluciones . ingeniería</div>
+      </div>
+      <p>Consultoría especializada en contratación pública colombiana. Pasto, Nariño · Colombia.</p>
+      <div class="facad">
+        <p><strong>Proyecto académico</strong><br>David Fernando Delgado Nichoy<br>Producción en Medios Digitales<br>UNIMINUTO · 2026</p>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Búsqueda SECOP II</a></li>
+        <li><a href="#servicios">Rastreo de recursos</a></li>
+        <li><a href="#servicios">Consultoría BPO</a></li>
+        <li><a href="#capacitaciones">Capacitaciones</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Recursos</h4>
+      <ul>
+        <li><a href="https://www.colombiacompra.gov.co" target="_blank">Colombia Compra</a></li>
+        <li><a href="https://www.secop.gov.co" target="_blank">SECOP II</a></li>
+        <li><a href="https://www.colombiacompra.gov.co/sia-observa" target="_blank">SIA Observa</a></li>
+        <li><a href="#recursos">Videos tutoriales</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Términos y condiciones</a></li>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2026 KoWeb Soluciones en Ingeniería · David Fernando Delgado Nichoy · Proyecto académico UNIMINUTO · Producción en Medios Digitales</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">YouTube</a>
+      <a href="https://wa.me/573185187722">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('fmsg');
+    msg.style.display = 'block';
+    msg.textContent = '✅ ¡Mensaje enviado! Te contactaremos pronto.';
+    e.target.reset();
+    setTimeout(() => { msg.style.display = 'none'; }, 5000);
+  }
+</script>
+</body>
+</html>
